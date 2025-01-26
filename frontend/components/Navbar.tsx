@@ -4,7 +4,7 @@ import Link from "next/link";
 
 const Navbar: React.FC = () => {
   return (
-    <nav className="bg-foreground shadow-md fixed w-full z-10">
+    <nav className="bg-foreground shadow-md fixed w-full z-10 md:h-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           {/* Logo on the left */}
@@ -27,7 +27,7 @@ const Navbar: React.FC = () => {
             >
               Home
             </a>
-            <a
+            {/* <a
               href="#"
               className="text-secondary hover:text-gray-900 px-3 py-2 duration-300 ease-in-out uppercase rounded-md text-sm font-medium"
             >
@@ -38,7 +38,7 @@ const Navbar: React.FC = () => {
               className="text-secondary hover:text-gray-900 px-3 py-2 duration-300 ease-in-out uppercase rounded-md text-sm font-medium"
             >
               Contact
-            </a>
+            </a> */}
           </div>
 
           {/* Connect Wallet button on the right */}
