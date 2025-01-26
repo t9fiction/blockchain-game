@@ -4,17 +4,13 @@ import React, { useState } from "react";
 import { writeContract } from "@wagmi/core";
 import { config1 } from "@/config/config1";
 import { GUESSING_GAME_ABI, SEPOLIA_GUESSING_GAME_ADDRESS } from "@/contract";
+import { useAccount } from "wagmi";
 
 const Hero: React.FC = () => {
   const [value, setValue] = useState<number | undefined>(undefined);
   const [error, setError] = useState<string | null>(null);
-
-  const result = await writeContract(config1, {
-    abi: GUESSING_GAME_ABI,
-    address: SEPOLIA_GUESSING_GAME_ADDRESS,
-    functionName: "guessNumber",
-    args: [value],
-  });
+  const { address, chainId } = useAccount();
+  console.log(address, chainId);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = parseInt(e.target.value, 10);
@@ -27,7 +23,7 @@ const Hero: React.FC = () => {
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (value === undefined || value < 1 || value > 10) {
@@ -35,8 +31,18 @@ const Hero: React.FC = () => {
       return;
     }
 
-    // Process the valid value here
-    alert(`Submitted value: ${value}`);
+    try {
+      const result = await writeContract(config1, {
+        abi: GUESSING_GAME_ABI,
+        address: SEPOLIA_GUESSING_GAME_ADDRESS,
+        functionName: "guessNumber",
+        args: [value],
+      });
+      console.log("Transaction:", result);
+    } catch (err) {
+      console.error("Error:", err);
+      setError("Transaction failed");
+    }
   };
 
   return (
