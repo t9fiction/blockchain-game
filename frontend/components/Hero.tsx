@@ -33,9 +33,9 @@ const Hero: React.FC = () => {
     <div className="fixed flex flex-col my-12 py-12 items-center justify-center w-full h-screen ">
       <form
         onSubmit={handleSubmit}
-        className="bg-white p-8 rounded-lg shadow-md max-w-sm w-full"
+        className="bg-primary border-2 border-secondary p-8 rounded-lg shadow-md max-w-sm w-full"
       >
-        <h1 className="text-xl font-bold text-gray-800 mb-4">Hero Component</h1>
+        <h1 className="text-xl font-bold text-gray-800 mb-4">Guess and earn LMNG Tokens</h1>
         <label
           htmlFor="numberInput"
           className="block text-sm font-medium text-gray-700 mb-2"

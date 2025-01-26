@@ -19,28 +19,6 @@ const Navbar: React.FC = () => {
             </h3>
           </div>
 
-          {/* Menu buttons in the center */}
-          <div className="hidden md:flex md:items-center md:space-x-6 flex-grow justify-center">
-            <a
-              href="#"
-              className="text-secondary hover:text-gray-900 px-3 py-2 duration-300 ease-in-out uppercase rounded-md text-sm font-medium"
-            >
-              Home
-            </a>
-            {/* <a
-              href="#"
-              className="text-secondary hover:text-gray-900 px-3 py-2 duration-300 ease-in-out uppercase rounded-md text-sm font-medium"
-            >
-              About
-            </a>
-            <a
-              href="#"
-              className="text-secondary hover:text-gray-900 px-3 py-2 duration-300 ease-in-out uppercase rounded-md text-sm font-medium"
-            >
-              Contact
-            </a> */}
-          </div>
-
           {/* Connect Wallet button on the right */}
           <div className="flex items-center">
             <ConnectButton />
@@ -48,29 +26,7 @@ const Navbar: React.FC = () => {
         </div>
       </div>
 
-      {/* Mobile menu (responsive) */}
-      <div className="md:hidden">
-        <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-          <a
-            href="#"
-            className="text-secondary hover:text-gray-900 block px-3 py-2 duration-300 ease-in-out rounded-md text-base font-medium"
-          >
-            Home
-          </a>
-          <a
-            href="#"
-            className="text-secondary hover:text-gray-900 block px-3 py-2 duration-300 ease-in-out rounded-md text-base font-medium"
-          >
-            About
-          </a>
-          <a
-            href="#"
-            className="text-secondary hover:text-gray-900 block px-3 py-2 duration-300 ease-in-out rounded-md text-base font-medium"
-          >
-            Contact
-          </a>
-        </div>
-      </div>
+      
     </nav>
   );
 };
