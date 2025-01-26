@@ -24,6 +24,7 @@ export default function ConnectButton() {
                     Connect
                 </div>
                 : <div className="text-secondary border border-spacing-1 border-foreground ">
+                    {/* @ts-expect-error */}
                     <appkit-button />
                 </div>
             }
