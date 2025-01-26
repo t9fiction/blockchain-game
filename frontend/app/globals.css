@@ -3,19 +3,23 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --color-primary: #1F2937; /* Align with Tailwind primary color */
+  --color-secondary: #F59E0B; /* Align with Tailwind secondary color */
+  --color-bground: #F3F4F6; /* Light gray background */
+  --color-fground: #0781a0; /* Dark gray foreground/text */
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --color-bground: #1F2937; /* Dark background */
+    --color-fground: #31343a; /* Light text */
+    --color-primary: #9CA3AF; /* Dark theme color for primary */
+    --color-secondary: #FBBF24; /* Dark theme color for secondary */
   }
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
+  color: var(--color-fg-main);
+  background: var(--color-bg-main);
   font-family: Arial, Helvetica, sans-serif;
 }
