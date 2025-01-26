@@ -6,7 +6,7 @@ import { useAppKit } from '@reown/appkit/react';
 export default function ConnectButton() {
     const { open } = useAppKit();
     const { isConnected } = useAppKitAccount();
-    const { disconnect } = useDisconnect();
+    // const { disconnect } = useDisconnect();
 
     const handleOpen = () => {
         open(); // Opens the AppKit interface or modal
