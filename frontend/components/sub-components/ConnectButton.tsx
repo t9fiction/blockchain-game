@@ -1,6 +1,6 @@
 'use client'
 import React from 'react';
-import { useAppKitAccount, useDisconnect } from '@reown/appkit/react';
+import { useAppKitAccount } from '@reown/appkit/react';
 import { useAppKit } from '@reown/appkit/react';
 
 export default function ConnectButton() {
