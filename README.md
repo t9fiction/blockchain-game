@@ -1,4 +1,4 @@
-```markdown
+
 # Blockchain Guessing Game
 
 Link: [Play the Game](https://blockchain-game-3qn6.vercel.app/)
