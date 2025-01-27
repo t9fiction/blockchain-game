@@ -8,15 +8,16 @@ import { useAccount } from "wagmi";
 import { getPublicClient } from "@wagmi/core";
 import toast, { Toaster } from "react-hot-toast";
 import ConnectButton from "./sub-components/ConnectButton";
+import { GameResultEvent } from "@/types/events";
 
 const Hero: React.FC = () => {
   const [value, setValue] = useState<number | undefined>(undefined);
   const [error, setError] = useState<string | null>(null);
-  const [lastResult, setLastResult] = useState<{
-    guess: number;
-    reward: bigint;
-    winType: string;
-  } | null>(null);
+  // const [lastResult, setLastResult] = useState<{
+  //   guess: number;
+  //   reward: bigint;
+  //   winType: string;
+  // } | null>(null);
 
   const publicClient = getPublicClient(config1);
   const { address, chainId, isConnected } = useAccount();
@@ -30,8 +31,9 @@ const Hero: React.FC = () => {
       abi: GUESSING_GAME_ABI,
       eventName: "GameResult",
       onLogs: (logs) => {
-        // TypeScript safe way to access log data
-        const eventData = logs[0]?.args; 
+        
+        const log = logs[0] as unknown as GameResultEvent;
+        const eventData = log.args; 
 
         if (!eventData) return;
 
@@ -54,11 +56,11 @@ const Hero: React.FC = () => {
           // });
 
           // Update last result state
-          setLastResult({
-            guess: Number(guess),
-            reward,
-            winType: winType as string,
-          });
+          // setLastResult({
+          //   guess: Number(guess),
+          //   reward,
+          //   winType: winType as string,
+          // });
         }
       },
     });
@@ -159,7 +161,7 @@ const Hero: React.FC = () => {
           </div>
         )}
 
-        {lastResult && lastResult.winType !== "NONE" && (
+        {/* {lastResult && lastResult.winType !== "NONE" && (
           <div className="mt-4 p-4 bg-green-100 border border-green-400 rounded-lg">
             <p className="text-green-700">
               {lastResult.winType === "EXACT"
@@ -167,7 +169,7 @@ const Hero: React.FC = () => {
                 : "👏 Close guess! You won 500 LMNG tokens!"}
             </p>
           </div>
-        )}
+        )} */}
       </form>
     </div>
   );
