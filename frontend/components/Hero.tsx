@@ -5,8 +5,8 @@ import { writeContract, watchContractEvent } from "@wagmi/core";
 import { config1 } from "@/config/config1";
 import { GUESSING_GAME_ABI, SEPOLIA_GUESSING_GAME_ADDRESS } from "@/contract";
 import { useAccount } from "wagmi";
-import { getPublicClient } from '@wagmi/core';
-import toast, { Toaster } from 'react-hot-toast';
+import { getPublicClient } from "@wagmi/core";
+import toast, { Toaster } from "react-hot-toast";
 import ConnectButton from "./sub-components/ConnectButton";
 
 const Hero: React.FC = () => {
@@ -17,49 +17,47 @@ const Hero: React.FC = () => {
     reward: bigint;
     winType: string;
   } | null>(null);
-  
+
   const publicClient = getPublicClient(config1);
   const { address, chainId, isConnected } = useAccount();
 
   // Set up event listener
   useEffect(() => {
-    if (!isConnected){
-      alert("Please connect your wallet first!");
-      return;
-    } 
+    if (!isConnected) return;
 
     const unwatch = watchContractEvent(config1, {
       address: SEPOLIA_GUESSING_GAME_ADDRESS,
       abi: GUESSING_GAME_ABI,
-      eventName: 'GameResult',
+      eventName: "GameResult",
       onLogs: (logs) => {
         // TypeScript safe way to access log data
         const log = logs[0];
-        const eventData = (log as any).args;  // Type assertion as a temporary fix
-        
+        const eventData = (log as any).args; // Type assertion as a temporary fix
+
         if (!eventData) return;
-        
+
         const [player, guess, reward, winType] = eventData;
-        
+
         // Only process events for the current player
         if (player.toLowerCase() === address?.toLowerCase()) {
           const messages = {
-            EXACT: '🎉 Congratulations! Perfect guess! You won 1000 LMNG tokens!',
-            CLOSE: '👏 Close guess! You won 500 LMNG tokens!',
-            NONE: '❌ Not quite right. Try again!'
+            EXACT:
+              "🎉 Congratulations! Perfect guess! You won 1000 LMNG tokens!",
+            CLOSE: "👏 Close guess! You won 500 LMNG tokens!",
+            NONE: "❌ Not quite right. Try again!",
           };
 
           // Show toast notification
           toast(messages[winType as keyof typeof messages], {
             duration: 5000,
-            position: 'top-center',
+            position: "top-center",
           });
 
           // Update last result state
           setLastResult({
             guess: Number(guess),
             reward,
-            winType: winType as string
+            winType: winType as string,
           });
         }
       },
@@ -99,19 +97,19 @@ const Hero: React.FC = () => {
 
     try {
       toast.loading("Submitting your guess...");
-      
+
       const hash = await writeContract(config1, {
         abi: GUESSING_GAME_ABI,
         address: SEPOLIA_GUESSING_GAME_ADDRESS,
         functionName: "guessNumber",
         args: [value],
       });
-      
+
       console.log("Transaction Hash:", hash);
-      
+
       const receipt = await publicClient.waitForTransactionReceipt({ hash });
       console.log("Transaction Mined:", receipt);
-      
+
       toast.dismiss();
       setValue(undefined); // Reset input after successful submission
     } catch (err) {
@@ -148,24 +146,25 @@ const Hero: React.FC = () => {
           className="border border-gray-300 rounded-lg p-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
         {error && <p className="text-sm text-red-500 mt-2">{error}</p>}
-        {isConnected ? <button
-          type="submit"
-          className="mt-4 w-full bg-blue-500 text-white font-medium py-2 px-4 rounded-lg hover:bg-blue-600 transition-colors duration-300"
-        >
-          Submit
-        </button> :
-        <div className="mt-4 w-full bg-blue-500 text-white font-medium py-2 px-4 rounded-lg hover:bg-blue-600 transition-colors duration-300">
-          <ConnectButton />
-        </div>
-        }
-        
+        {isConnected ? (
+          <button
+            type="submit"
+            className="mt-4 w-full bg-blue-500 text-white font-medium py-2 px-4 rounded-lg hover:bg-blue-600 transition-colors duration-300"
+          >
+            Submit
+          </button>
+        ) : (
+          <div className="mt-4 w-full bg-blue-500 border border-primary text-white font-medium  px-4 rounded-lg hover:bg-blue-600 transition-colors duration-300">
+            <ConnectButton />
+          </div>
+        )}
 
-        {lastResult && lastResult.winType !== 'NONE' && (
+        {lastResult && lastResult.winType !== "NONE" && (
           <div className="mt-4 p-4 bg-green-100 border border-green-400 rounded-lg">
             <p className="text-green-700">
-              {lastResult.winType === 'EXACT' 
-                ? '🎉 Perfect guess! You won 1000 LMNG tokens!' 
-                : '👏 Close guess! You won 500 LMNG tokens!'}
+              {lastResult.winType === "EXACT"
+                ? "🎉 Perfect guess! You won 1000 LMNG tokens!"
+                : "👏 Close guess! You won 500 LMNG tokens!"}
             </p>
           </div>
         )}
