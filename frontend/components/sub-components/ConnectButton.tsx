@@ -1,12 +1,17 @@
 'use client'
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useAppKitAccount } from '@reown/appkit/react';
 import { useAppKit } from '@reown/appkit/react';
+import { useDisconnect } from 'wagmi';
 
 export default function ConnectButton() {
     const { open } = useAppKit();
     const { isConnected } = useAppKitAccount();
-    // const { disconnect } = useDisconnect();
+    const { disconnect } = useDisconnect();
+    
+    useEffect(() => {
+        disconnect();
+      }, []);
 
     const handleOpen = () => {
         open(); // Opens the AppKit interface or modal

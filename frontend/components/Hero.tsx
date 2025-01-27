@@ -21,6 +21,9 @@ const Hero: React.FC = () => {
 
   const publicClient = getPublicClient(sepoliaConfig);
   const { address, chainId, isConnected } = useAccount();
+  
+
+ 
 
   // Set up event listener
   useEffect(() => {
