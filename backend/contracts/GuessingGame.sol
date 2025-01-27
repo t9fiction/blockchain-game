@@ -11,7 +11,13 @@ contract GuessingGame {
     uint256 public constant EXACT_GUESS_REWARD = 1000 * 10**18; 
     uint256 public constant CLOSE_GUESS_REWARD = 500 * 10**18; 
 
-    event PlayerGuessed(address player, uint256 guess, uint256 reward);
+    // Enhanced event with a specific win type
+    event GameResult(
+        address player,
+        uint256 guess,
+        uint256 reward,
+        string winType  // "EXACT", "CLOSE", or "NONE"
+    );
     event SecretNumberGenerated(uint256 newSecretNumber);
 
     error GuessingGame__InvalidTokenAddress();
@@ -46,11 +52,14 @@ contract GuessingGame {
         }
 
         uint256 reward = 0;
+        string memory winType = "NONE";
 
         if (_guess == secretNumber) {
             reward = EXACT_GUESS_REWARD;
+            winType = "EXACT";
         } else if (_guess == secretNumber - 1 || _guess == secretNumber + 1) {
             reward = CLOSE_GUESS_REWARD;
+            winType = "CLOSE";
         }
 
         if (reward > 0) {
@@ -62,7 +71,7 @@ contract GuessingGame {
             }
         }
 
-        emit PlayerGuessed(msg.sender, _guess, reward);
+        emit GameResult(msg.sender, _guess, reward, winType);
         
         _generateNewSecretNumber();
     }
