@@ -4,7 +4,7 @@
 Link: [Play the Game](https://blockchain-game-3qn6.vercel.app/)
 
 ## Overview
-The Blockchain Guessing Game is a decentralized number-guessing game where players can win ERC20 tokens by participating. The game currently runs on the Sepolia testnet, but it has also been deployed on Arbitrum Sepolia. Integration with Arbitrum Sepolia can be enabled if needed.
+The Blockchain Guessing Game is a decentralized number-guessing game where players can win ERC20 tokens by participating. The game is now a **multichain dApp** deployed on both the **Sepolia testnet** and the **Arbitrum Sepolia testnet**.
 
 The objective of the game is to guess a secret number between 1 and 10, with rewards based on the accuracy of the player's guess. It offers a fun, interactive way to showcase blockchain-based gaming and token rewards.
 
@@ -29,11 +29,10 @@ The objective of the game is to guess a secret number between 1 and 10, with rew
 - [x] ERC20 Token Contract Creation and deployment on Sepolia. 
 - [x] ERC20 Token Contract Creation and deployment on Arbitrum Sepolia. 
 - [x] Custom contract “GuessingGame” deployment and working on Sepolia. 
-- [x] Custom contract “GuessingGame” deployment and working on Arbitrum. 
+- [x] Custom contract “GuessingGame” deployment and working on Arbitrum Sepolia. 
 - [x] Rewards distribution working on both chains. 
-- [x] Frontend with Next.js with TypeScript created. 
-- [x] Sepolia chain Web3 integration done with the frontend. 
-- [ ] Arbitrum Sepolia Web3 integration done with the frontend (can be done if required).
+- [x] Frontend with Next.js and TypeScript created. 
+- [x] Multichain Web3 integration done for Sepolia and Arbitrum Sepolia on the frontend.  
 
 ## Technologies Used
 - **Solidity**
@@ -90,7 +89,6 @@ The objective of the game is to guess a secret number between 1 and 10, with rew
 - **Error Handling**: Transactions are wrapped in try-catch blocks to prevent failures from crashing the application.
 
 ## Future Improvements
-- **Full Integration with Arbitrum Sepolia**: Enable seamless switching between Sepolia and Arbitrum Sepolia networks on the frontend.
 - **Leaderboards**: Add a leaderboard to display top players and their token earnings.
 - **UI Enhancements**: Introduce animations and visuals to enhance user engagement.
 - **Mainnet Deployment**: Prepare contracts and UI for deployment to Ethereum mainnet or other EVM-compatible mainnets.
@@ -99,3 +97,4 @@ The objective of the game is to guess a secret number between 1 and 10, with rew
 ---
 
 For any inquiries or issues, please feel free to reach out.
+
