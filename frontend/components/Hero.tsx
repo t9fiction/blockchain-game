@@ -31,17 +31,11 @@ const Hero: React.FC = () => {
       eventName: "GameResult",
       onLogs: (logs) => {
         // TypeScript safe way to access log data
-        const log = logs[0];
-        const eventData = (log as any).args; // Type assertion as a temporary fix
-        
+        const eventData = logs[0]?.args; 
+
         if (!eventData) return;
-        
-        console.log("Event Data:", eventData);
-        const {player, guess, reward, winType} = eventData;
-        console.log("Player:", player);
-        console.log("Guess:", guess);
-        console.log("Reward:", reward);
-        console.log("Win Type:", winType);
+
+        const { player, guess, reward, winType } = eventData;
 
         // Only process events for the current player
         if (player.toLowerCase() === address?.toLowerCase()) {
@@ -51,12 +45,13 @@ const Hero: React.FC = () => {
             CLOSE: "👏 Close guess! You won 500 LMNG tokens!",
             NONE: "❌ Not quite right. Try again!",
           };
+          alert(messages[winType as keyof typeof messages]);
 
           // Show toast notification
-          toast(messages[winType as keyof typeof messages], {
-            duration: 5000,
-            position: "top-center",
-          });
+          // toast(messages[winType as keyof typeof messages], {
+          //   duration: 5000,
+          //   position: "top-center",
+          // });
 
           // Update last result state
           setLastResult({
