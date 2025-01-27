@@ -5,11 +5,14 @@ import { writeContract } from "@wagmi/core";
 import { config1 } from "@/config/config1";
 import { GUESSING_GAME_ABI, SEPOLIA_GUESSING_GAME_ADDRESS } from "@/contract";
 import { useAccount } from "wagmi";
+import { getPublicClient } from '@wagmi/core'
 
 const Hero: React.FC = () => {
   const [value, setValue] = useState<number | undefined>(undefined);
   const [error, setError] = useState<string | null>(null);
-  const { address, chainId } = useAccount();
+  const publicClient = getPublicClient(config1)
+
+  const { address, chainId, isConnected } = useAccount();
   console.log(address, chainId);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -26,19 +29,32 @@ const Hero: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
+    if(isConnected === false) {
+      setError("Please connect your wallet");
+      return;
+    } else if (chainId !== 11155111 && chainId !== 421614) {
+      setError("Please switch to Sepolia Testnet or Arbitrum Sepolia Testnet");
+      return;
+    }
+
     if (value === undefined || value < 1 || value > 10) {
       setError("Please enter a valid number between 1 and 10.");
       return;
     }
 
     try {
-      const result = await writeContract(config1, {
+      const hash = await writeContract(config1, {
         abi: GUESSING_GAME_ABI,
         address: SEPOLIA_GUESSING_GAME_ADDRESS,
         functionName: "guessNumber",
         args: [value],
       });
-      console.log("Transaction:", result);
+      console.log("Transaction Hash:", hash);
+      
+      // Use your provider to wait for transaction
+      const receipt = await publicClient.waitForTransactionReceipt({ hash })
+    
+      console.log("Transaction Mined:", receipt);
     } catch (err) {
       console.error("Error:", err);
       setError("Transaction failed");
