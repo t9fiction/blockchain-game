@@ -33,10 +33,15 @@ const Hero: React.FC = () => {
         // TypeScript safe way to access log data
         const log = logs[0];
         const eventData = (log as any).args; // Type assertion as a temporary fix
-
+        
         if (!eventData) return;
-
-        const [player, guess, reward, winType] = eventData;
+        
+        console.log("Event Data:", eventData);
+        const {player, guess, reward, winType} = eventData;
+        console.log("Player:", player);
+        console.log("Guess:", guess);
+        console.log("Reward:", reward);
+        console.log("Win Type:", winType);
 
         // Only process events for the current player
         if (player.toLowerCase() === address?.toLowerCase()) {
