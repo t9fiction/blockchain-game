@@ -17,7 +17,7 @@ export default function ConnectButton() {
             {!isConnected ? (
                 <div
                     onClick={handleOpen}
-                    className="text-secondary hover:text-gray-900 uppercase border border-spacing-1 border-white cursor-pointer ease-in-out duration-300 rounded-sm py-2 px-4 border-foreground"
+                    className="text-secondary hover:text-gray-900 uppercase cursor-pointer ease-in-out duration-300 rounded-sm py-2 px-4 border-foreground mx-auto flex items-center justify-center"
                 >
                     Connect
                 </div>

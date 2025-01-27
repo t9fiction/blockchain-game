@@ -21,7 +21,9 @@ const Navbar: React.FC = () => {
 
           {/* Connect Wallet button on the right */}
           <div className="flex items-center">
+            <div className="border border-spacing-1 border-white">
             <ConnectButton />
+            </div>
           </div>
         </div>
       </div>
