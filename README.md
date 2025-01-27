@@ -99,4 +99,3 @@ The objective of the game is to guess a secret number between 1 and 10, with rew
 ---
 
 For any inquiries or issues, please feel free to reach out.
-```
