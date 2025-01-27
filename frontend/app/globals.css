@@ -12,14 +12,14 @@
 @media (prefers-color-scheme: dark) {
   :root {
     --color-bground: #1F2937; /* Dark background */
-    --color-fground: #31343a; /* Light text */
+    --color-fground: #6c7b99; /* Light text */
     --color-primary: #9CA3AF; /* Dark theme color for primary */
     --color-secondary: #FBBF24; /* Dark theme color for secondary */
   }
 }
 
 body {
-  color: var(--color-fg-main);
-  background: var(--color-bg-main);
+  color: var(--color-fground);
+  background: var(--color-bground);
   font-family: Arial, Helvetica, sans-serif;
 }

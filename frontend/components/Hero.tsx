@@ -9,7 +9,7 @@ import {
 } from "@/contract";
 import { useAccount } from "wagmi";
 import { getPublicClient } from "@wagmi/core";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 import ConnectButton from "./sub-components/ConnectButton";
 import { GameResultEvent } from "@/types/events";
 import { arbSepoliaConfig, sepoliaConfig } from "@/config/allConfigs";
@@ -161,8 +161,7 @@ const Hero: React.FC = () => {
   };
 
   return (
-    <div className="fixed flex flex-col my-12 py-12 items-center justify-center w-full h-screen">
-      <Toaster />
+    <div className="absolute flex items-center justify-center w-full">
       <form
         onSubmit={handleSubmit}
         className="bg-primary border-2 border-secondary p-8 rounded-lg shadow-md max-w-sm w-full"

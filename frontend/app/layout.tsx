@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import ContextProvider from "@/context";
-import { headers } from 'next/headers'
+import { headers } from "next/headers";
 import Navbar from "@/components/Navbar";
+import { Footer } from "@/components/Footer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -35,7 +36,9 @@ export default async function RootLayout({
       >
         <ContextProvider cookies={cookies}>
           <Navbar />
-          {children}</ContextProvider>
+          {children}
+          <Footer />
+        </ContextProvider>
       </body>
     </html>
   );
