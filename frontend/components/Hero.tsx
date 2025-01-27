@@ -2,13 +2,17 @@
 
 import React, { useState, useEffect } from "react";
 import { writeContract, watchContractEvent } from "@wagmi/core";
-import { GUESSING_GAME_ABI, SEPOLIA_GUESSING_GAME_ADDRESS } from "@/contract";
+import {
+  ARBITRUM_GUESSING_GAME_ADDRESS,
+  GUESSING_GAME_ABI,
+  SEPOLIA_GUESSING_GAME_ADDRESS,
+} from "@/contract";
 import { useAccount } from "wagmi";
 import { getPublicClient } from "@wagmi/core";
 import toast, { Toaster } from "react-hot-toast";
 import ConnectButton from "./sub-components/ConnectButton";
 import { GameResultEvent } from "@/types/events";
-import { sepoliaConfig } from "@/config/allConfigs";
+import { arbSepoliaConfig, sepoliaConfig } from "@/config/allConfigs";
 
 const Hero: React.FC = () => {
   const [value, setValue] = useState<number | undefined>(undefined);
@@ -19,24 +23,48 @@ const Hero: React.FC = () => {
     winType: string;
   } | null>(null);
 
-  const publicClient = getPublicClient(sepoliaConfig);
+  const publicClientSepolia = getPublicClient(sepoliaConfig);
+  const publicClientArbitrum = getPublicClient(arbSepoliaConfig);
   const { address, chainId, isConnected } = useAccount();
+
+  const guessingGameAddress =
+    chainId === 11155111
+      ? SEPOLIA_GUESSING_GAME_ADDRESS
+      : chainId === 421614
+      ? ARBITRUM_GUESSING_GAME_ADDRESS
+      : null;
+
+  const config =
+    chainId === 11155111
+      ? sepoliaConfig
+      : chainId === 421614
+      ? arbSepoliaConfig
+      : null;
+
+  const publicClient =
+    chainId === 11155111
+      ? publicClientSepolia
+      : chainId === 421614
+      ? publicClientArbitrum
+      : null;
+
   
-
- 
-
   // Set up event listener
   useEffect(() => {
     if (!isConnected) return;
 
-    const unwatch = watchContractEvent(sepoliaConfig, {
-      address: SEPOLIA_GUESSING_GAME_ADDRESS,
+    if (!config || !guessingGameAddress) {
+      setError("Unsupported network. Please switch to Sepolia or Arbitrum Sepolia.");
+      return;
+    }
+
+    const unwatch = watchContractEvent(config, {
+      address: guessingGameAddress,
       abi: GUESSING_GAME_ABI,
       eventName: "GameResult",
       onLogs: (logs) => {
-        
         const log = logs[0] as unknown as GameResultEvent;
-        const eventData = log.args; 
+        const eventData = log.args;
 
         if (!eventData) return;
 
@@ -103,16 +131,23 @@ const Hero: React.FC = () => {
     try {
       toast.loading("Submitting your guess...");
 
-      const hash = await writeContract(sepoliaConfig, {
+      if (!config || !publicClient || !guessingGameAddress) {
+        setError("Unsupported network. Please switch to Sepolia or Arbitrum Sepolia.");
+        return;
+      }
+
+      const hash = await writeContract(config, {
         abi: GUESSING_GAME_ABI,
-        address: SEPOLIA_GUESSING_GAME_ADDRESS,
+        address: guessingGameAddress,
         functionName: "guessNumber",
         args: [value],
       });
 
       console.log("Transaction Hash:", hash);
 
-      const receipt = await publicClient.waitForTransactionReceipt({ hash });
+      const receipt = await publicClient.waitForTransactionReceipt({
+        hash,
+      });
       console.log("Transaction Mined:", receipt);
 
       toast.dismiss();

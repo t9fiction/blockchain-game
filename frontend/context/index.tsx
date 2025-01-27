@@ -3,7 +3,7 @@
 import { wagmiAdapter, projectId } from '@/config'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { createAppKit } from '@reown/appkit/react'
-import { sepolia } from '@reown/appkit/networks'
+import { arbitrumSepolia, sepolia } from '@reown/appkit/networks'
 import React, { type ReactNode } from 'react'
 import { cookieToInitialState, WagmiProvider, type Config } from 'wagmi'
 
@@ -17,7 +17,7 @@ if (!projectId) {
 // Set up metadata
 const metadata = {
   name: 'Guessing Game',
-  description: 'Guess the number and earn tokens',
+  description: 'Guess the number and earn LMNG tokens',
   url: 'https://appkitexampleapp.com', // origin must match your domain & subdomain
   icons: ['https://avatars.githubusercontent.com/u/179229932']
 }
@@ -26,7 +26,7 @@ const metadata = {
 const modal = createAppKit({
   adapters: [wagmiAdapter],
   projectId,
-  networks: [sepolia],
+  networks: [sepolia, arbitrumSepolia],
   defaultNetwork: sepolia,
   metadata: metadata,
   features: {
