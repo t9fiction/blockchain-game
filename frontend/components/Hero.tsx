@@ -2,31 +2,31 @@
 
 import React, { useState, useEffect } from "react";
 import { writeContract, watchContractEvent } from "@wagmi/core";
-import { config1 } from "@/config/config1";
 import { GUESSING_GAME_ABI, SEPOLIA_GUESSING_GAME_ADDRESS } from "@/contract";
 import { useAccount } from "wagmi";
 import { getPublicClient } from "@wagmi/core";
 import toast, { Toaster } from "react-hot-toast";
 import ConnectButton from "./sub-components/ConnectButton";
 import { GameResultEvent } from "@/types/events";
+import { sepoliaConfig } from "@/config/allConfigs";
 
 const Hero: React.FC = () => {
   const [value, setValue] = useState<number | undefined>(undefined);
   const [error, setError] = useState<string | null>(null);
-  // const [lastResult, setLastResult] = useState<{
-  //   guess: number;
-  //   reward: bigint;
-  //   winType: string;
-  // } | null>(null);
+  const [lastResult, setLastResult] = useState<{
+    guess: number;
+    reward: bigint;
+    winType: string;
+  } | null>(null);
 
-  const publicClient = getPublicClient(config1);
+  const publicClient = getPublicClient(sepoliaConfig);
   const { address, chainId, isConnected } = useAccount();
 
   // Set up event listener
   useEffect(() => {
     if (!isConnected) return;
 
-    const unwatch = watchContractEvent(config1, {
+    const unwatch = watchContractEvent(sepoliaConfig, {
       address: SEPOLIA_GUESSING_GAME_ADDRESS,
       abi: GUESSING_GAME_ABI,
       eventName: "GameResult",
@@ -56,11 +56,11 @@ const Hero: React.FC = () => {
           // });
 
           // Update last result state
-          // setLastResult({
-          //   guess: Number(guess),
-          //   reward,
-          //   winType: winType as string,
-          // });
+          setLastResult({
+            guess: Number(guess),
+            reward,
+            winType: winType as string,
+          });
         }
       },
     });
@@ -100,7 +100,7 @@ const Hero: React.FC = () => {
     try {
       toast.loading("Submitting your guess...");
 
-      const hash = await writeContract(config1, {
+      const hash = await writeContract(sepoliaConfig, {
         abi: GUESSING_GAME_ABI,
         address: SEPOLIA_GUESSING_GAME_ADDRESS,
         functionName: "guessNumber",
@@ -161,7 +161,7 @@ const Hero: React.FC = () => {
           </div>
         )}
 
-        {/* {lastResult && lastResult.winType !== "NONE" && (
+        {lastResult && lastResult.winType !== "NONE" && (
           <div className="mt-4 p-4 bg-green-100 border border-green-400 rounded-lg">
             <p className="text-green-700">
               {lastResult.winType === "EXACT"
@@ -169,7 +169,7 @@ const Hero: React.FC = () => {
                 : "👏 Close guess! You won 500 LMNG tokens!"}
             </p>
           </div>
-        )} */}
+        )}
       </form>
     </div>
   );
