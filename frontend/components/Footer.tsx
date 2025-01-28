@@ -5,12 +5,13 @@ export function Footer() {
     <div className="relative">
       <div className="flex justify-between items-center max-w-screen-xl py-4 px-4 grid-cols-1 mx-auto border-t border-secondary dark:border-trueGray-700 ">
         <div className="flex items-center justify-center">
-          <div className="flex space-x-5 text-secondary">
+          <div className="flex space-x-5 text-primary">
             <a
               href="https://twitter.com/t9fiction"
               target="_blank"
               rel="noopener"
-            >
+              className="hover:text-secondary"
+              >
               <span className="sr-only">Twitter</span>
               <Twitter />
             </a>
@@ -18,7 +19,8 @@ export function Footer() {
               href="https://facebook.com/sohail.ishaque"
               target="_blank"
               rel="noopener"
-            >
+              className="hover:text-secondary"
+              >
               <span className="sr-only">Facebook</span>
               <Facebook />
             </a>
@@ -26,11 +28,12 @@ export function Footer() {
               href="https://instagram.com/t9fiction"
               target="_blank"
               rel="noopener"
-            >
+              className="hover:text-secondary"
+              >
               <span className="sr-only">Instagram</span>
               <Instagram />
             </a>
-            <a href="https://linkedin.com/in/sohail.ishaque" target="_blank" rel="noopener">
+            <a href="https://linkedin.com/in/sohail.ishaque" className="hover:text-secondary" target="_blank" rel="noopener">
               <span className="sr-only">Linkedin</span>
               <Linkedin />
             </a>

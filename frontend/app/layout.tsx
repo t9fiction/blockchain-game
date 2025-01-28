@@ -32,7 +32,7 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-slate-600`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased `}
       >
         <ContextProvider cookies={cookies}>
           <Navbar />

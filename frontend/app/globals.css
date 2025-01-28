@@ -13,8 +13,8 @@
   :root {
     --color-bground: #1F2937; /* Dark background */
     --color-fground: #6c7b99; /* Light text */
-    --color-primary: #9CA3AF; /* Dark theme color for primary */
-    --color-secondary: #FBBF24; /* Dark theme color for secondary */
+    --color-primary: #4c909c; /* Dark theme color for primary */
+    --color-secondary: #ffffff; /* Dark theme color for secondary */
   }
 }
 
