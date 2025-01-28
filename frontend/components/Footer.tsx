@@ -39,8 +39,8 @@ export function Footer() {
             </a>
           </div>
         </div>
-        <div className="text-center text-secondary">
-          Copyright © {new Date().getFullYear()}. Made with ♥ by 
+        <div className="text-center text-secondary font-light text-sm">
+          Copyright © {new Date().getFullYear()} - All right reserved by 
           {" "}
           <a href="https://www.glazestock.com/" target="_blank" rel="noopener ">
             NumericSins
