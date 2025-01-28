@@ -166,12 +166,12 @@ const Hero: React.FC = () => {
         onSubmit={handleSubmit}
         className="bg-primary border-2 border-secondary p-8 rounded-lg shadow-md max-w-sm w-full"
       >
-        <h1 className="text-xl font-bold text-gray-800 mb-4">
+        <h1 className="text-xl font-bold text-trueGray mb-4">
           Guess and earn LMNG Tokens
         </h1>
         <label
           htmlFor="numberInput"
-          className="block text-sm font-medium text-gray-700 mb-2"
+          className="block text-sm font-medium text-trueGray mb-2"
         >
           Enter a number (1-10):
         </label>
@@ -193,7 +193,7 @@ const Hero: React.FC = () => {
             Submit
           </button>
         ) : (
-          <div className="mt-4 w-full bg-blue-500 border border-primary text-white font-medium  px-4 rounded-lg hover:bg-blue-600 transition-colors duration-300">
+          <div className="mt-4 w-full bg-secondary border-trueGray border-2 font-medium px-4 rounded-lg hover:bg-primary transition-colors duration-300">
             <ConnectButton />
           </div>
         )}

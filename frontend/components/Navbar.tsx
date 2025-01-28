@@ -39,7 +39,7 @@ const Navbar: React.FC = () => {
           <div className="flex items-center">
             <Image
               className="h-20 w-auto"
-              src="/logo.png"
+              src="/logo1.png"
               alt="Logo"
               width={400}
               height={160}
@@ -68,7 +68,7 @@ const Navbar: React.FC = () => {
 
           {/* Connect button */}
           <div className="flex items-center mr-2 lg:flex ml-auto lg:ml-0 lg:order-2">
-            <div className="border border-spacing-1 border-white hover:border-secondary duration-300 ease-in-out rounded-md">
+            <div className="border border-spacing-1 border-secondary hover:border-primary duration-300 ease-in-out rounded-md">
               <ConnectButton />
             </div>
           </div>

@@ -13,7 +13,7 @@ export default {
         foreground: "var(--color-fground)",
         primary: "var(--color-primary)",
         secondary: "var(--color-secondary)",
-        trueGray: "var(#1f1f1f)",
+        trueGray: "var(--color-third)",
       },
     },
   },
