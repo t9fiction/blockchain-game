@@ -3,7 +3,7 @@ import React from "react";
 export function Footer() {
   return (
     <div className="relative">
-      <div className="flex justify-between items-center max-w-screen-xl py-4 px-4 grid-cols-1 mx-auto border-t border-secondary dark:border-trueGray-700 ">
+      <div className="flex flex-col lg:flex-row justify-between items-center max-w-screen-xl py-4 px-4 grid-cols-1 mx-auto border-t border-secondary dark:border-trueGray-700 ">
         <div className="flex items-center justify-center">
           <div className="flex space-x-5 text-primary">
             <a
@@ -39,7 +39,7 @@ export function Footer() {
             </a>
           </div>
         </div>
-        <div className="text-center text-secondary font-light text-sm">
+        <div className="text-center text-secondary font-light text-sm lg:py-1 pt-4">
           Copyright © {new Date().getFullYear()} - All right reserved by 
           {" "}
           <a href="https://www.dummy.com/" target="_blank" rel="noopener ">
